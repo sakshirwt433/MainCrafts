@@ -1,0 +1,171 @@
+
+:root {
+    --primary: #6366f1;
+    --primary-glow: rgba(99, 102, 241, 0.4);
+    --bg-deep: #020617;
+    --bg-surface: #0f172a;
+    --text-high: #f8fafc;
+    --text-low: #94a3b8;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.08);
+    --font: 'Inter', sans-serif;
+}
+
+/* 2. Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--text-high);
+    font-family: var(--font);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* 3. Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 8%;
+    background: rgba(2, 6, 23, 0.8);
+    backdrop-filter: blur(12px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-high);
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.7;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    opacity: 1;
+    color: var(--primary);
+}
+/* --- Table & Dashboard Specifics --- */
+.page-header {
+    text-align: left;
+    margin-bottom: 2.5rem;
+}
+
+.table-container {
+    padding: 0; /* Remove padding to let table header flush to edges */
+    overflow: hidden;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.table-scroll {
+    overflow-x: auto;
+    max-height: 60vh;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+th {
+    background: rgba(255,255,255,0.02);
+    text-align: left;
+    padding: 1.2rem 2rem;
+    color: var(--primary);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+td {
+    padding: 1.2rem 2rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+tr:hover td {
+    background: rgba(99, 102, 241, 0.03);
+}
+
+/* --- UI Elements --- */
+.user-badge {
+    font-weight: 600;
+    color: var(--text-high);
+}
+
+.table-link {
+    color: var(--text-low);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.table-link:hover {
+    color: var(--primary);
+}
+
+.msg-cell {
+    color: var(--text-low);
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Keeps table neat with long text */
+}
+
+.date-cell {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--text-low);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 5rem !important;
+    color: var(--text-low);
+}
+
+.btn-danger {
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+    border: 1px solid #f43f5e;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    width: auto;
+}
+
+.btn-danger:hover {
+    background: #f43f5e;
+    color: white;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | ByteVerse Submissions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="submissions.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">BYTE<span>VERSE</span></div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="submissions.html" class="active">Admin</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1>Data <span>Vault</span></h1>
+            <p>Reviewing all incoming inquiries from the ByteVerse ecosystem.</p>
+        </header>
+
+        <div class="glass-card table-container">
+            <div class="table-header">
+                <h3>Inbound Messages</h3>
+                <button class="btn btn-danger" onclick="clearData()">Purge Database</button>
+            </div>
+            
+            <div class="table-scroll">
+                <table id="submissionTable">
+                    <thead>
+                        <tr>
+                            <th>Sender</th>
+                            <th>Email Address</th>
+                            <th>Message Preview</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function loadSubmissions() {
+            const listBody = document.getElementById("listBody");
+            const data = JSON.parse(localStorage.getItem("byteverse_contacts")) || [];
+
+            if (data.length === 0) {
+                listBody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="empty-state">
+                            <div class="icon">📁</div>
+                            <p>No records found in local storage.</p>
+                        </td>
+                    </tr>`;
+                return;
+            }
+
+            listBody.innerHTML = data.map(s => `
+                <tr>
+                    <td><span class="user-badge">${s.name}</span></td>
+                    <td><a href="mailto:${s.email}" class="table-link">${s.email}</a></td>
+                    <td class="msg-cell">${s.message}</td>
+                    <td class="date-cell">${s.date || 'Recent'}</td>
+                </tr>
+            `).reverse().join(''); // Show newest first
+        }
+
+        function clearData() {
+            if(confirm("DANGER: This will permanently delete all local submissions. Proceed?")) {
+                localStorage.removeItem("byteverse_contacts");
+                loadSubmissions();
+            }
+        }
+
+        window.onload = loadSubmissions;
+    </script>
+</body>
+</html>
